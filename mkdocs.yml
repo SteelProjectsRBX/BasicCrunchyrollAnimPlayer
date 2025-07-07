@@ -1,0 +1,8 @@
+site_name: Basic Crunchyroll Anim Player
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Intro: intro.md
+  - API Reference: api.md
