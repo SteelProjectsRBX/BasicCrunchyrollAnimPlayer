@@ -4,7 +4,6 @@ local crunchyroll = require("./Packages/crunchyroll")
 local animPlayer = require("@self/player")
 
 -- // Player types
-export type AnimPlayerModel = animPlayer.AnimPlayerModel
 export type AnimationPlayData = animPlayer.AnimationPlayData
 export type AnimPlayerFull = animPlayer.AnimPlayerFull
 

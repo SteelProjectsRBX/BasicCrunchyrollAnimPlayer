@@ -5,39 +5,48 @@ local Crunchyroll = require("../Packages/crunchyroll")
 local playerConstructor = {}
 local playerMethods = {} :: AnimPlayerMethods
 
-export type AnimPlayerModel = Model & { Joints: Folder }
-
 export type AnimationPlayData = Crunchyroll.AnimationTrack & {
 	Looped: boolean,
 }
 
 export type AnimPlayerObj = {
 	Rig: Crunchyroll.Rig,
-	LiveModel: AnimPlayerModel,
+	_NameSortedJoints: { [string]: Motor6D },
 
 	_PlayingAnims: { [Crunchyroll.AnimationAsset]: AnimationPlayData },
 }
 
 export type AnimPlayerMethods = {
-	SetLimbCFramesInstantly: (self: AnimPlayerFull, newLimbWorldCFrames: { [string]: CFrame }) -> (),
+	SetLimbCFramesInstantly: (
+		self: AnimPlayerFull,
+		newLimbWorldCFrames: { [string]: CFrame },
+		rootCF: CFrame,
+		updateLiveToo: boolean?
+	) -> (),
 
 	StartPlayingAnimation: (
 		self: AnimPlayerFull,
 		animAsset: Crunchyroll.AnimationAsset,
 		initialTrackData: AnimationPlayData
 	) -> (),
-	UpdateLiveLimbCFrames: (self: AnimPlayerFull) -> (),
+	UpdateLiveLimbCFrames: (self: AnimPlayerFull, rootCF: CFrame) -> (),
 	StopPlayingAnimation: (self: AnimPlayerFull, animToStop: Crunchyroll.AnimationAsset) -> (),
 
-	StepForward: (self: AnimPlayerFull, dt: number, updateLiveToo: boolean?) -> (),
+	StepForward: (self: AnimPlayerFull, dt: number, rootCF: CFrame, updateLiveToo: boolean?) -> (),
 }
 
 export type AnimPlayerFull = AnimPlayerObj & AnimPlayerMethods
 
-function playerConstructor.CreateAnimator(rig: Crunchyroll.Rig, liveModel: AnimPlayerModel): AnimPlayerFull
+function playerConstructor.CreateAnimator(rig: Crunchyroll.Rig, motor6Ds: { Motor6D }): AnimPlayerFull
+	local _nameSortedJoints = {}
+
+	for _, motor6d in motor6Ds do
+		_nameSortedJoints[motor6d.Name] = motor6d
+	end
+
 	local self: AnimPlayerObj = {
 		Rig = rig,
-		LiveModel = liveModel,
+		_NameSortedJoints = _nameSortedJoints,
 
 		_PlayingAnims = {},
 	}
@@ -52,37 +61,32 @@ end
 function playerMethods.SetLimbCFramesInstantly(
 	self: AnimPlayerFull,
 	newLimbWorldCFrames: { [string]: CFrame },
+	rootCF: CFrame,
 	updateLiveToo: boolean?
 )
 	self.Rig.result_coordinate_frames = newLimbWorldCFrames
 
 	if updateLiveToo == true then
-		self:UpdateLiveLimbCFrames()
+		self:UpdateLiveLimbCFrames(rootCF)
 	end
 end
 
-function playerMethods.UpdateLiveLimbCFrames(self: AnimPlayerFull)
-	local liveModel = self.LiveModel
-
-	local primaryPart = liveModel.PrimaryPart :: BasePart
-
-	local rootCF = primaryPart.CFrame
+function playerMethods.UpdateLiveLimbCFrames(self: AnimPlayerFull, rootCF: CFrame)
+	local motor6Ds = self._NameSortedJoints
 
 	for name, cf in self.Rig.result_coordinate_frames do
 		if name == "root" then
 			continue
 		end
 
-		local correspondingMotor6D = (liveModel.Joints :: any)[name] :: Motor6D
+		local correspondingMotor6D = motor6Ds[name]
 		local newCF = rootCF:ToObjectSpace(cf):Inverse() * correspondingMotor6D.C0
 
 		correspondingMotor6D.C1 = newCF
 	end
 end
 
-function playerMethods.StepForward(self: AnimPlayerFull, dt: number, updateLiveToo: boolean?)
-	local primaryPart = self.LiveModel.PrimaryPart :: BasePart
-
+function playerMethods.StepForward(self: AnimPlayerFull, dt: number, rootCF: CFrame, updateLiveToo: boolean?)
 	for asset, track in self._PlayingAnims do
 		local totalTime = asset.length
 		local newAlpha = track.alpha + (dt / totalTime)
@@ -95,10 +99,10 @@ function playerMethods.StepForward(self: AnimPlayerFull, dt: number, updateLiveT
 		track.alpha = newAlpha % 1 -- modulus 1 to wrap it around when it overshoots
 	end
 
-	Crunchyroll.solve_animation(self.Rig, self._PlayingAnims, primaryPart.CFrame) -- also updates rig.result_coordinate_frames
+	Crunchyroll.solve_animation(self.Rig, self._PlayingAnims, rootCF) -- also updates rig.result_coordinate_frames
 
 	if updateLiveToo then
-		self:UpdateLiveLimbCFrames()
+		self:UpdateLiveLimbCFrames(rootCF)
 	end
 end
 
