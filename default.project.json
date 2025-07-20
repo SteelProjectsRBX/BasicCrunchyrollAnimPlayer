@@ -1,11 +1,7 @@
 {
-	"name": "BasicCRAnimationPlayer",
+	"name": "BasicCrunchyrollAnimPlayer",
 	
 	"tree": {
-		"$path": "src",
-
-		"Packages": {
-			"$path": "Packages"
-		}
+		"$path": "src"
 	}
 }

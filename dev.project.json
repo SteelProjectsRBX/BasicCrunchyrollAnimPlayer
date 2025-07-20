@@ -1,0 +1,11 @@
+{
+	"name": "BasicCrunchyrollAnimPlayer",
+	
+	"tree": {
+		"$path": "Packages",
+
+		"BasicCrunchyrollAnimPlayer": {
+			"$path": "default.project.json"
+		}
+	}
+}

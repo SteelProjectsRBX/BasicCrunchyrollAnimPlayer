@@ -5,4 +5,6 @@
 /*.rbxlx.lock
 /*.rbxl.lock
 
+Packages/
+
 build.rbxm

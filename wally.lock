@@ -8,6 +8,6 @@ version = "0.1.0"
 dependencies = []
 
 [[package]]
-name = "user/crunchyroll-animation-player"
+name = "steelprojectsrbx/basiccrunchyrollanimplayer"
 version = "0.1.0"
 dependencies = [["crunchyroll", "ffrostfall/crunchyroll@0.1.0"]]

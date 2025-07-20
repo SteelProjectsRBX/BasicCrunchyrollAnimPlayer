@@ -1,6 +1,6 @@
 --!strict
 
-local crunchyroll = require("./Packages/crunchyroll")
+local crunchyroll = require(script.Parent.crunchyroll)
 local animPlayer = require("@self/player")
 
 -- // Player types
