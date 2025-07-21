@@ -796,12 +796,12 @@
 <p><code>rootCF</code> should be the <code>HumanoidRootPart.CFrame</code>.</p>
 <hr />
 <h4 id="stepforwarddt-number-rootcf-cframe-updatelivetoo-boolean"><code>:StepForward(dt: number, rootCF: CFrame, updateLiveToo: boolean?)</code><a class="headerlink" href="#stepforwarddt-number-rootcf-cframe-updatelivetoo-boolean" title="Permanent link">&para;</a></h4>
-<p>Steps forward every animation by <code>dt</code>. Stops every animation when its done, unless <a href="/datatypes/AnimationPlayData/#alpha-number"><code>.Looped</code></a> is true.</p>
+<p>Steps forward every animation by <code>dt</code>. Stops every animation when its done, unless <a href="/BasicCrunchyrollAnimPlayer/datatypes/AnimationPlayData/#alpha-number"><code>.Looped</code></a> is true.</p>
 <hr />
 <h4 id="setlimbcframesinstantlynewlimbworldcframes-string-cframe-rootcf-cframe-updatelivetoo-boolean"><code>:SetLimbCFramesInstantly(newLimbWorldCFrames: {[string]: CFrame}, rootCF: CFrame, updateLiveToo: boolean)</code><a class="headerlink" href="#setlimbcframesinstantlynewlimbworldcframes-string-cframe-rootcf-cframe-updatelivetoo-boolean" title="Permanent link">&para;</a></h4>
 <p>Immediately sets <code>self.LimbCFrames</code> to the provided <code>newLimbWorldCFrames</code> table, and optionally also updates <code>Motor6D.C1</code>s if <code>updateLiveToo</code> is <code>true</code>.</p>
 <hr />
-<h4 id="startplayinganimationanimasset-animationasset-playdata-animationplaydata"><code>:StartPlayingAnimation(animAsset: <a href="https://ffrostfall.github.io/crunchyroll/api/AnimationAsset" target="_blank">AnimationAsset</a>, playData: <a href="/datatypes/AnimationPlayData">AnimationPlayData</a></code><a class="headerlink" href="#startplayinganimationanimasset-animationasset-playdata-animationplaydata" title="Permanent link">&para;</a></h4>
+<h4 id="startplayinganimationanimasset-animationasset-playdata-animationplaydata"><code>:StartPlayingAnimation(animAsset: <a href="https://ffrostfall.github.io/crunchyroll/api/AnimationAsset" target="_blank">AnimationAsset</a>, playData: <a href="/BasicCrunchyrollAnimPlayer/datatypes/AnimationPlayData">AnimationPlayData</a></code><a class="headerlink" href="#startplayinganimationanimasset-animationasset-playdata-animationplaydata" title="Permanent link">&para;</a></h4>
 <p>Begins playing an animation by inserting it in <a href="/BasicCrunchyrollAnimPlayer/api/#playinganims-animationasset-animationplaydata"><code>self.PlayingAnims</code></a>.</p>
 <p><code>animAsset</code> can be retrieved by calling <code> <a href="https://ffrostfall.github.io/crunchyroll/api/Crunchyroll#load_keyframe_sequence" target="_blank">crunchyroll.load_keyframe_sequence(keyframe_sequence)</a> </code></p>
 <hr />
