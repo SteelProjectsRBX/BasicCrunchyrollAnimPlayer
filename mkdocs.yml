@@ -1,0 +1,45 @@
+site_name: Basic Crunchyroll Anim Player
+theme:
+  name: material
+  features:
+    - toc.follow
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+repo_url: https://github.com/SteelProjectsRBX/BasicCrunchyrollAnimPlayer
+repo_name: "BasicCrunchyrollAnimPlayer"
+edit_uri: https://github.com/SteelProjectsRBX/BasicCrunchyrollAnimPlayer
+
+nav:
+  - About: index.md
+  - Getting started: intro.md
+  - Data Types:
+    - AnimationData: datatypes/AnimationPlayData.md
+  - API Reference: api.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  
+  - toc:
+     permalink: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
