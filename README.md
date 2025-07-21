@@ -8,6 +8,8 @@ It works with any rig format you give it (R6, R15, custom) and this repository c
 
 To actually move the limbs using the API, you can pass an array of [`Motor6Ds`](https://create.roblox.com/docs/reference/engine/classes/Motor6D) for this module to manipulate. If you don't want to use Motor6Ds, you can just use the result world CFrames at any time via [`player.LimbCFrames`](https://steelprojectsrbx.github.io/BasicCrunchyrollAnimPlayer/api/#limbcframes-string-cframe)
 
+Use cases for this include finer control over animations and lag compensation.
+
 Documentation: https://steelprojectsrbx.github.io/BasicCrunchyrollAnimPlayer/
 
 # Installation
