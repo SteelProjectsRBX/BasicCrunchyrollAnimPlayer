@@ -1,4 +1,4 @@
-This is a basic custom animation player, which wraps around [ffrostfall's crunchyroll](https://github.com/ffrostfall/crunchyroll) to play animations from `AnimationTracks`.
+This is a basic custom animation player, which wraps around [ffrostfall's crunchyroll](https://github.com/ffrostfall/crunchyroll) to play animations from `KeyframeSequences`.
 
 
 https://github.com/user-attachments/assets/20c4fef7-9eeb-4935-b2ca-038187333e7e
