@@ -33,6 +33,8 @@ export type AnimPlayerMethods = {
 	UpdateLiveLimbCFrames: (self: AnimPlayerFull, rootCF: CFrame) -> (),
 	StopPlayingAnimation: (self: AnimPlayerFull, animToStop: Crunchyroll.AnimationAsset) -> (),
 
+	GetLimbWorldCFrames: (self: AnimPlayerFull) -> {[string]: CFrame},
+
 	StepForward: (self: AnimPlayerFull, dt: number, rootCF: CFrame, updateLiveToo: boolean?) -> (),
 }
 
@@ -86,6 +88,10 @@ function playerMethods.UpdateLiveLimbCFrames(self: AnimPlayerFull, rootCF: CFram
 
 		correspondingMotor6D.C1 = newCF
 	end
+end
+
+function playerMethods.GetLimbWorldCFrames(self: AnimPlayerFull)
+	return self.LimbCFrames
 end
 
 function playerMethods.StepForward(self: AnimPlayerFull, dt: number, rootCF: CFrame, updateLiveToo: boolean?)
