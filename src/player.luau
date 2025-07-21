@@ -1,6 +1,6 @@
 --!strict
 
-local Crunchyroll = require("../Packages/crunchyroll")
+local Crunchyroll = require(script.Parent.Parent.crunchyroll)
 
 local playerConstructor = {}
 local playerMethods = {} :: AnimPlayerMethods
