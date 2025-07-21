@@ -1,0 +1,1 @@
+Documentation: https://steelprojectsrbx.github.io/BasicCrunchyrollAnimPlayer/
