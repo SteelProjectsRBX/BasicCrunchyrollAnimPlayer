@@ -6,14 +6,15 @@ local playerConstructor = {}
 local playerMethods = {} :: AnimPlayerMethods
 
 export type AnimationPlayData = Crunchyroll.AnimationTrack & {
-	Looped: boolean,
+	looped: boolean,
 }
 
 export type AnimPlayerObj = {
 	Rig: Crunchyroll.Rig,
-	_NameSortedJoints: { [string]: Motor6D },
+	LimbCFrames: {[string]: CFrame},
+	PlayingAnims: { [Crunchyroll.AnimationAsset]: AnimationPlayData },
 
-	_PlayingAnims: { [Crunchyroll.AnimationAsset]: AnimationPlayData },
+	_NameSortedJoints: { [string]: Motor6D },
 }
 
 export type AnimPlayerMethods = {
@@ -46,9 +47,10 @@ function playerConstructor.CreateAnimator(rig: Crunchyroll.Rig, motor6Ds: { Moto
 
 	local self: AnimPlayerObj = {
 		Rig = rig,
+		PlayingAnims = {},
+		LimbCFrames = rig.result_coordinate_frames,
+		
 		_NameSortedJoints = _nameSortedJoints,
-
-		_PlayingAnims = {},
 	}
 
 	for name, fn in playerMethods do
@@ -64,7 +66,7 @@ function playerMethods.SetLimbCFramesInstantly(
 	rootCF: CFrame,
 	updateLiveToo: boolean?
 )
-	self.Rig.result_coordinate_frames = newLimbWorldCFrames
+	self.LimbCFrames, self.Rig.result_coordinate_frames = newLimbWorldCFrames, newLimbWorldCFrames
 
 	if updateLiveToo == true then
 		self:UpdateLiveLimbCFrames(rootCF)
@@ -87,11 +89,11 @@ function playerMethods.UpdateLiveLimbCFrames(self: AnimPlayerFull, rootCF: CFram
 end
 
 function playerMethods.StepForward(self: AnimPlayerFull, dt: number, rootCF: CFrame, updateLiveToo: boolean?)
-	for asset, track in self._PlayingAnims do
+	for asset, track in self.PlayingAnims do
 		local totalTime = asset.length
 		local newAlpha = track.alpha + (dt / totalTime)
 
-		if newAlpha >= 1 and not track.Looped then
+		if newAlpha >= 1 and not track.looped then
 			self:StopPlayingAnimation(asset)
 			continue
 		end
@@ -99,7 +101,7 @@ function playerMethods.StepForward(self: AnimPlayerFull, dt: number, rootCF: CFr
 		track.alpha = newAlpha % 1 -- modulus 1 to wrap it around when it overshoots
 	end
 
-	Crunchyroll.solve_animation(self.Rig, self._PlayingAnims, rootCF) -- also updates rig.result_coordinate_frames
+	Crunchyroll.solve_animation(self.Rig, self.PlayingAnims, rootCF) -- also updates rig.result_coordinate_frames
 
 	if updateLiveToo then
 		self:UpdateLiveLimbCFrames(rootCF)
@@ -111,11 +113,12 @@ function playerMethods.StartPlayingAnimation(
 	animAsset: Crunchyroll.AnimationAsset,
 	playData: AnimationPlayData
 )
-	self._PlayingAnims[animAsset] = playData
+	
+	self.PlayingAnims[animAsset] = playData
 end
 
 function playerMethods.StopPlayingAnimation(self: AnimPlayerFull, animToStop: Crunchyroll.AnimationAsset)
-	self._PlayingAnims[animToStop] = nil
+	self.PlayingAnims[animToStop] = nil
 end
 
 return playerConstructor
