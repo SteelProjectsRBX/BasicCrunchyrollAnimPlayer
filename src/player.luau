@@ -1,4 +1,5 @@
 --!strict
+--!nolint LocalShadow
 
 local Crunchyroll = require(script.Parent.Parent.crunchyroll)
 
@@ -7,6 +8,7 @@ local playerMethods = {} :: AnimPlayerMethods
 
 export type AnimationPlayData = Crunchyroll.AnimationTrack & {
 	looped: boolean,
+	speed: number?,
 }
 
 export type AnimPlayerObj = {
@@ -30,6 +32,7 @@ export type AnimPlayerMethods = {
 		animAsset: Crunchyroll.AnimationAsset,
 		initialTrackData: AnimationPlayData
 	) -> (),
+	
 	UpdateLiveLimbCFrames: (self: AnimPlayerFull, rootCF: CFrame) -> (),
 	StopPlayingAnimation: (self: AnimPlayerFull, animToStop: Crunchyroll.AnimationAsset) -> (),
 
@@ -97,6 +100,8 @@ end
 function playerMethods.StepForward(self: AnimPlayerFull, dt: number, rootCF: CFrame, updateLiveToo: boolean?)
 	for asset, track in self.PlayingAnims do
 		local totalTime = asset.length
+		local dt = dt * (track.speed or 1)
+
 		local newAlpha = track.alpha + (dt / totalTime)
 
 		if newAlpha >= 1 and not track.looped then

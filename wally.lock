@@ -9,5 +9,5 @@ dependencies = []
 
 [[package]]
 name = "steelprojectsrbx/basiccrunchyrollanimplayer"
-version = "0.1.0"
+version = "0.1.2"
 dependencies = [["crunchyroll", "ffrostfall/crunchyroll@0.1.0"]]
