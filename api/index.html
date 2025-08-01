@@ -339,7 +339,7 @@
   
   
   <span class="md-ellipsis">
-    AnimationData
+    AnimationPlayData
     
   </span>
   
@@ -786,7 +786,8 @@
 <p>Equal to <a href="https://ffrostfall.github.io/crunchyroll/api/Rig#result_coordinate_frames"><code>rig.result_coordinate_frames</code></a>. The CFrames are in world space.</p>
 <hr />
 <h4 id="playinganims-animationasset-animationplaydata">PlayingAnims [ {[<a href="https://ffrostfall.github.io/crunchyroll/api/AnimationAsset" target="_blank">AnimationAsset</a>]: <a href="/BasicCrunchyrollAnimPlayer/datatypes/AnimationPlayData">AnimationPlayData</a>} ]<a class="headerlink" href="#playinganims-animationasset-animationplaydata" title="Permanent link">&para;</a></h4>
-<p>The list of currently playing animations. Imagine it as <code>Animator:GetPlayingAnimationTracks()</code>. <strong>Not meant to be written into.</strong></p>
+<p>The list of currently playing animations. Imagine it as <code>Animator:GetPlayingAnimationTracks()</code>. </p>
+<p>You can modify the settings of the animations at runtime. For example, you might want to change the speed. You can do so by doing <code>PlayingAnims[animAsset].speed = 2</code></p>
 <hr />
 <h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
 <h4 id="getlimbworldcframesrootcf-cframe"><code>:GetLimbWorldCFrames(rootCF: CFrame)</code><a class="headerlink" href="#getlimbworldcframesrootcf-cframe" title="Permanent link">&para;</a></h4>

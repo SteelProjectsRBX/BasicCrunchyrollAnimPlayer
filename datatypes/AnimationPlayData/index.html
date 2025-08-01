@@ -20,7 +20,7 @@
     
     
       
-        <title>AnimationData - Basic Crunchyroll Anim Player</title>
+        <title>AnimationPlayData - Basic Crunchyroll Anim Player</title>
       
     
     
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AnimationData
+              AnimationPlayData
             
           </span>
         </div>
@@ -352,7 +352,7 @@
   
   
   <span class="md-ellipsis">
-    AnimationData
+    AnimationPlayData
     
   </span>
   
@@ -365,7 +365,7 @@
   
   
   <span class="md-ellipsis">
-    AnimationData
+    AnimationPlayData
     
   </span>
   
@@ -410,6 +410,15 @@
   <a href="#alpha-number" class="md-nav__link">
     <span class="md-ellipsis">
       alpha [number]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speed-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      speed [number?]
     </span>
   </a>
   
@@ -558,6 +567,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#speed-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      speed [number?]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#start_fade_time-number" class="md-nav__link">
     <span class="md-ellipsis">
       start_fade_time [number]
@@ -643,6 +661,10 @@
 <h2 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h2>
 <h3 id="alpha-number">alpha [number]<a class="headerlink" href="#alpha-number" title="Permanent link">&para;</a></h3>
 <p>The percentage (0 - 1) of the animation progress.</p>
+<hr />
+<h3 id="speed-number">speed [number?]<a class="headerlink" href="#speed-number" title="Permanent link">&para;</a></h3>
+<p>The animation play speed. If not supplied, the player will behave as if it was set to 1 (normal speed).</p>
+<p>If set to 2, the animation will play twice as fast, and if set to 0.5, it will be half as fast, and so on.</p>
 <hr />
 <h3 id="start_fade_time-number">start_fade_time [number]<a class="headerlink" href="#start_fade_time-number" title="Permanent link">&para;</a></h3>
 <p>⠀</p>
