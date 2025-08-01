@@ -16,7 +16,7 @@ Documentation: https://steelprojectsrbx.github.io/BasicCrunchyrollAnimPlayer/
 
 ## Wally
 ```
-basiccrunchyrollanimplayer = "steelprojectsrbx/basiccrunchyrollanimplayer@0.1.2"
+basiccrunchyrollanimplayer = "steelprojectsrbx/basiccrunchyrollanimplayer@0.1.3"
 ```
 
 ## Roblox Studio
